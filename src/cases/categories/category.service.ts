@@ -15,7 +15,11 @@ export class CategoryService {
         return this.repository.find();  
     }
 
+<<<<<<< HEAD
+    findById(id: string): Promise<Category | null> {
+=======
     findById(id: string): Promise<Category> {
+>>>>>>> fa1fbda2a0c29c13ea0f7a773fd733470a91b7f2
         return this.repository.findOneBy({id:id});
     }
 
