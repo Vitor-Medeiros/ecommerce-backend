@@ -6,6 +6,7 @@ import { ProductModule } from './cases/products/product.module';
 import { ConfigModule } from '@nestjs/config';
 import { CityModule } from './cases/cities/city.module';
 import { CustomerModule } from './cases/customers/customer.module';
+import { OrderModule } from './cases/orders/entities/order.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CustomerModule } from './cases/customers/customer.module';
     ProductModule,
     CityModule,
     CustomerModule,
+    OrderModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

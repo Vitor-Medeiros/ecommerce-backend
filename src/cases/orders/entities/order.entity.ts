@@ -1,43 +1,50 @@
-import { Customer } from "src/cases/customers/customer.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { OrderItem } from "./order-item.entity";
+import { Customer } from 'src/cases/customers/customer.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { OrderItem } from './order-item.entity';
 
 enum OrderStatus {
-    NEW = 'NEW',
-    SEPARATION = 'SEPARATION',
-    INVOICED = 'INVOICED',
-    SHIPPED = 'SHIPPED',
-    DELIVERED = 'DELIVERED',
-    CANCELED = 'CANCELED'
+  NEW = 'NEW',
+  SEPARATION = 'SEPARATION',
+  INVOICED = 'INVOICED',
+  SHIPPED = 'SHIPPED',
+  DELIVERED = 'DELIVERED',
+  CANCELED = 'CANCELED',
 }
 
-@Entity('order')
+@Entity('orders')
 export class Order {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
-    @ManyToOne(() => Customer, {eager: true, nullable: false})
-    customer: Customer;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column('decimal', {nullable:true, precision: 10, scale: 2})
-    shipping: number
+  @ManyToOne(() => Customer, { nullable: false, eager: true })
+  customer: Customer;
 
-    @Column('enum', { enum: OrderStatus, default: OrderStatus.NEW })
-    status: OrderStatus;
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+  shipping: number;
 
-    @Column('decimal', {nullable:true, precision: 10, scale: 2})
-    total: number;
+  @Column('enum', { enum: OrderStatus, default: OrderStatus.NEW })
+  status: string;
 
-    @OneToMany(() => OrderItem, (item: OrderItem) => item.order, {
-        eager: true, 
-        cascade: true
-    })
-    items: OrderItem[];
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+  total: number;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @OneToMany(() => OrderItem, (item) => item.order, {
+    eager: true,
+    cascade: true,
+  })
+  items: OrderItem[];
 
-    @UpdateDateColumn()
-    updatedAt: Date;
-    
-    
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
