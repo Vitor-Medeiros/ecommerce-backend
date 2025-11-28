@@ -29,7 +29,7 @@ export class Product {
   @ManyToOne(() => Category, { eager: true, nullable: false })
   category: Category;
 
-  @ManyToOne(() => Brand, { eager: false, nullable: true })
+  @ManyToOne(() => Brand, { eager: true, nullable: true })
   brand: Brand;
 
   @OneToMany(() => ProductPhoto, (photo) => photo.product, {

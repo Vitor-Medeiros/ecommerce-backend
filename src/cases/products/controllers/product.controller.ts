@@ -26,7 +26,7 @@ export class ProductController {
   async find(@Query('categoryId') categoryId: string): Promise<Product[]> {
     if (categoryId && isUUID(categoryId)) {
       const category = await this.categoryService.findById(categoryId);
-      return this.service.findAll(category);
+      return this.service.findAll(category!);
     }
     return this.service.findAll();
   }
